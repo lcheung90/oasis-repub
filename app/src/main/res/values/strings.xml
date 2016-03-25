@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Oasis</string>
+    <string name="scan_button_text">SCAN</string>
+    <string name="locate_button_text">LOCATE</string>
+    <string name="scan_history_text">Scan History</string>
 </resources>
