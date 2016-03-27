@@ -22,7 +22,7 @@ public class HomeActivity extends AppCompatActivity {
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent scanner = new Intent(HomeActivity.this, QRScanActivity.class);
-                        startActivity(scanner);
+                        startActivityForResult(scanner,0);
                     }
                 }
         );
