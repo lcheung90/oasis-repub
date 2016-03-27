@@ -30,4 +30,14 @@ public class HomeActivity extends AppCompatActivity {
                 }
         );
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            Bundle b = data.getExtras();
+            String s = b.getString("info");
+            barcodeInfo.setText(s);
+        }
+    }
 }
