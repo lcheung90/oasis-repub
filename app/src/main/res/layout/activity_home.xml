@@ -25,4 +25,13 @@
         android:id="@+id/btn_locate"
         android:layout_below="@+id/btn_scan"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/tv_debug_qrresult"
+        android:layout_below="@+id/btn_locate"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="71dp" />
 </RelativeLayout>
