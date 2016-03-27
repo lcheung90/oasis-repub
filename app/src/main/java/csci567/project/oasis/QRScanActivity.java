@@ -73,7 +73,12 @@ public class QRScanActivity extends AppCompatActivity {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
 
                 if (barcodes.size() != 0) {
-                    //retrieve data from qrcode
+                    Intent i = new Intent();
+                    Bundle building_id = new Bundle();
+                    building_id.putString("info",barcodes.valueAt(0).displayValue);
+                    i.putExtras(building_id);
+                    setResult(RESULT_OK, i);
+                    finish();
                 }
             }
         });
