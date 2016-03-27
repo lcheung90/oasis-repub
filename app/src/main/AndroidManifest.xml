@@ -26,7 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-		<activity android:name=".QRScanActivity">
+        <activity android:name=".QRScanActivity" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <meta-data
                 android:name="com.google.android.gms.vision.DEPENDENCIES"
                 android:value="barcode"/>
