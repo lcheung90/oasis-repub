@@ -14,18 +14,19 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Button buttonLocate = (Button) findViewById(R.id.btn_locate);
-        assert buttonLocate != null;
+
         buttonLocate.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                locate();
+                System.out.print("it is listening to the button");
+                Intent intent = new Intent(HomeActivity.this, MapsActivity.class);
+                System.out.print("it will start an activity");
+                startActivity(intent);
+
             }
         });
     }
 
-    public void locate(){
-        Intent intent = new Intent(this, MapsActivity.class);
-    }
 
 }
