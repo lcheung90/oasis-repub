@@ -17,8 +17,7 @@
         android:text="@string/title"/>
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android/>
+        android:layout_height="10dp"/>
     <Button
         android:id="@+id/b1floor"
         android:layout_below="@+id/title"
