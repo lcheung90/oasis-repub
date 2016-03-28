@@ -16,7 +16,9 @@ public class BuildingInfo extends Activity {
         String newTitle = intent.getStringExtra(MapsActivity.EXTRA_MARKER);
         title.setText(newTitle);
         title.setTextSize(40);
+        //title.setTextLocal
 
 
-    }
+
 }
+        }

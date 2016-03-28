@@ -13,40 +13,51 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:textColor="#4689C8"
+        android:textStyle="bold"
+        android:text="@string/title"
+        android:layout_alignBottom="@+id/ImageTitle"
         android:layout_centerHorizontal="true"
-        android:text="@string/title"/>
+        android:layout_marginBottom="390dp" />
+
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android/>
+        android:id="@+id/ImageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/meriam"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="421dp" />
+
+
     <Button
         android:id="@+id/b1floor"
-        android:layout_below="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="99dp"
-        android:text="@string/f1"/>
+        android:text="@string/f1"
+
+        android:layout_marginBottom="17dp"
+        android:layout_alignBottom="@+id/title"
+        android:layout_alignParentStart="true" />
     <Button
         android:id="@+id/b2floor"
-        android:layout_below="@+id/b1floor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/f2"/>
+        android:text="@string/f2"
+        android:layout_alignBottom="@+id/title"
+        android:layout_alignParentEnd="true" />
     <Button
         android:id="@+id/b3floor"
-        android:layout_below="@+id/b2floor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/f3"/>
+        android:text="@string/f3"
+        android:layout_below="@+id/b2floor"
+        android:layout_centerHorizontal="true" />
     <Button
         android:id="@+id/b4floor"
-        android:layout_below="@+id/b3floor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/f4"/>
+        android:text="@string/f4"
+        android:layout_below="@+id/b3floor"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
