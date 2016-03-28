@@ -50,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +90,9 @@ public class HomeActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.redeem_rewards) {
             Log.d(TAG, "Rewards Selected");
+
+            Intent redeem = new Intent(HomeActivity.this, RewardActivity.class);
+            startActivity(redeem);
             return true;
         }
 

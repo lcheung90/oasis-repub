@@ -27,7 +27,6 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
         Log.d(TAG, "We made it in!");
 
-        //onMapReady(mMap);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

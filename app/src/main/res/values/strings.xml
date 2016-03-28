@@ -6,4 +6,5 @@
     <string name="rewards">Rewards</string>
     <string name="title_activity_location">Map</string>
     <string name="title_activity_locate">Map</string>
+    <string name="title_activity_rewards">activity rewards</string>
 </resources>

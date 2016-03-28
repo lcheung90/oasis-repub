@@ -4,4 +4,12 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     tools:context="csci567.project.oasis.RewardActivity">
 
+
+
+    <TextView
+        android:id="@+id/rewardView"
+        android:text="Rewards!"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </RelativeLayout>
