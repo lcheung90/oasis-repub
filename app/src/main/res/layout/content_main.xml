@@ -12,4 +12,15 @@
     tools:context="csci567.project.oasis.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <Button
+        android:id="@+id/start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start"/>
+
+    <TextView
+        android:id="@+id/locations"
+        android:layout_below="@+id/start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
