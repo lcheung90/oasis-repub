@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="examples.csci567.androiddb_lucasnager.MainActivity">
+    <item
+        android:id="@+id/redeem_rewards"
+        android:orderInCategory="100"
+        android:title="@string/rewards"
+        android:icon="@drawable/ic_wallet_giftcard_24dp"
+        app:showAsAction="ifRoom" />
+</menu>

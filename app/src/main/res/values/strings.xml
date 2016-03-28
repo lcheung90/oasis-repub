@@ -3,4 +3,7 @@
     <string name="scan_button_text">SCAN</string>
     <string name="locate_button_text">LOCATE</string>
     <string name="scan_history_text">Scan History</string>
+    <string name="rewards">Rewards</string>
+    <string name="title_activity_location">Map</string>
+    <string name="title_activity_locate">Map</string>
 </resources>
