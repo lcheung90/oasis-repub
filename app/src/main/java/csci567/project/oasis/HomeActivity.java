@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+<<<<<<< HEAD
 import android.widget.Toast;
 
 
@@ -22,10 +23,14 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+=======
+import android.widget.TextView;
+>>>>>>> refs/remotes/origin/master
 
 
 public class HomeActivity extends AppCompatActivity {
 
+<<<<<<< HEAD
     private static final String TAG = "HomeActivity";
 
     //private GoogleApiClient client;
@@ -57,10 +62,24 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+=======
+	private TextView barcodeInfo;
+    private Button scanButton;
+>>>>>>> refs/remotes/origin/master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+		scanButton = (Button) findViewById(R.id.btn_scan);
+        barcodeInfo = (TextView) findViewById(R.id.tv_debug_qrresult);
+        scanButton.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent scanner = new Intent(HomeActivity.this, QRScanActivity.class);
+                        startActivityForResult(scanner,0);
+                    }
+                }
+        );
 
         ButterKnife.bind(this);
 
@@ -155,5 +174,13 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            Bundle b = data.getExtras();
+            String s = b.getString("info");
+            barcodeInfo.setText(s);
+        }
+    }
 }

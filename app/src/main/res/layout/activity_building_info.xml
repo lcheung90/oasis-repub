@@ -17,7 +17,11 @@
         android:text="@string/title"/>
     <ImageView
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="10dp" />
+=======
+        android:layout_height="10dp"/>
+>>>>>>> refs/remotes/origin/master
     <Button
         android:id="@+id/b1floor"
         android:layout_below="@+id/title"
