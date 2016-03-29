@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Oasis</string>
-<<<<<<< HEAD
+
     <string name="scan_button_text">SCAN</string>
     <string name="locate_button_text">LOCATE</string>
     <string name="scan_history_text">Scan History</string>
@@ -8,13 +8,14 @@
     <string name="title_activity_location">Map</string>
     <string name="title_activity_locate">Map</string>
     <string name="title_activity_rewards">activity rewards</string>
-=======
+
+
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+
     <string name="title_activity_maps">Map</string>
     <string name="start">Start</string>
     <string name="f1">Floor 1</string>
@@ -22,5 +23,5 @@
     <string name="f3">Floor 3</string>
     <string name="f4">Floor 4</string>
     <string name="title">Title</string>
->>>>>>> refs/remotes/origin/master
+
 </resources>

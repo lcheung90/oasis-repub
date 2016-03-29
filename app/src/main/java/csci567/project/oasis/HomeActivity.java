@@ -1,7 +1,6 @@
 package csci567.project.oasis;
 
 import android.content.Intent;
-<<<<<<< HEAD
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -20,23 +21,20 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-=======
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
->>>>>>> refs/remotes/origin/master
+
+
 
 public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = "HomeActivity";
-    private GoogleApiClient client;
+
+    //private GoogleApiClient client;
 
     //Mock scan history data - until we get QR scan working with a database
-    String[] code = {"650VC2H", "B71FP2Z", "7NFRJSO", "PDJ87OJ", "VN8GRXY", "72OJI2H", "650VC2H"};
-    String[] loc = {"Yolo Hall", "O'Connell Hall", "BMU", "Langdon Hall", "Trinity Hall", "Plumas Hall", "Yolo Hall"};
-    String[] day = {"03/26/16 11:15 A.M.", "03/26/16 1:05 P.M.", "03/26/16 2:35 P.M.",
-            "03/26/16 4:05 P.M.", "03/26/16 5:15 P.M.", "03/25/16 3:30 P.M.", "03/24/16 1:15 P.M."};
+    //String[] code = {"650VC2H", "B71FP2Z", "7NFRJSO", "PDJ87OJ", "VN8GRXY", "72OJI2H", "650VC2H"};
+    //String[] loc = {"Yolo Hall", "O'Connell Hall", "BMU", "Langdon Hall", "Trinity Hall", "Plumas Hall", "Yolo Hall"};
+    //String[] day = {"03/26/16 11:15 A.M.", "03/26/16 1:05 P.M.", "03/26/16 2:35 P.M.",
+            //"03/26/16 4:05 P.M.", "03/26/16 5:15 P.M.", "03/25/16 3:30 P.M.", "03/24/16 1:15 P.M."};
 
 
 
@@ -44,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
     @OnClick(R.id.scan_button)
     public void scan() {
         Log.d(TAG, "Scan Button Clicked");
+        //Intent scan = new Intent(HomeActivity.this, )
         //Toast.makeText(Context)
     }
 
@@ -51,7 +50,7 @@ public class HomeActivity extends AppCompatActivity {
     public void locate() {
         Log.d(TAG, "Locate Button Clicked");
 
-        Intent locate = new Intent(HomeActivity.this, LocationActivity.class);
+        Intent locate = new Intent(HomeActivity.this, MapsActivity.class);
         startActivity(locate);
         //Toast.makeText(Context)
     }
@@ -62,22 +61,22 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-<<<<<<< HEAD
+
         ButterKnife.bind(this);
 
         //RecyclerView - one option for displaying our QR scan recent history
-        RecyclerView qr_scan_history = (RecyclerView) findViewById(R.id.scan_history);
-        RecyclerView.Adapter adapter = new RecyclerAdapter(code, loc, day);
-        RecyclerView.LayoutManager layout_manager = new LinearLayoutManager(this);
+        //RecyclerView qr_scan_history = (RecyclerView) findViewById(R.id.scan_history);
+        //RecyclerView.Adapter adapter = new RecyclerAdapter(code, loc, day);
+        //RecyclerView.LayoutManager layout_manager = new LinearLayoutManager(this);
 
-        qr_scan_history.setLayoutManager(layout_manager);
-        qr_scan_history.setHasFixedSize(true);
-        qr_scan_history.setAdapter(adapter);
+        //qr_scan_history.setLayoutManager(layout_manager);
+        //qr_scan_history.setHasFixedSize(true);
+        //qr_scan_history.setAdapter(adapter);
 
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
@@ -108,7 +107,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-
+/*
     @Override
     public void onStart() {
         super.onStart();
@@ -148,25 +147,13 @@ public class HomeActivity extends AppCompatActivity {
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
     }
+*/
 
 
-=======
 
-        Button buttonLocate = (Button) findViewById(R.id.btn_locate);
 
-        buttonLocate.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                System.out.print("it is listening to the button");
-                Intent intent = new Intent(HomeActivity.this, MapsActivity.class);
-                System.out.print("it will start an activity");
-                startActivity(intent);
 
-            }
-        });
-    }
 
->>>>>>> refs/remotes/origin/master
 
 }
