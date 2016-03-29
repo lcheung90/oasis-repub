@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
@@ -37,15 +38,23 @@ public class BuildingInfo extends Activity {
 //        }
 
 
-
-
-
-
         TextView title = (TextView) findViewById(R.id.title);
         Intent intent = getIntent();
         String newTitle = intent.getStringExtra(MapsActivity.EXTRA_MARKER);
         title.setText(newTitle);
         title.setTextSize(40);
+
+        Button floor = (Button) findViewById(R.id.b1floor);
+
+        floor.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent scanner = new Intent(BuildingInfo.this, QRScanActivity.class);
+                        startActivityForResult(scanner, 0);
+                    }
+                }
+        );
+
 
 
     }

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="csci567.project.oasis">
 
-	<uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -26,10 +26,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QRScanActivity" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <activity
+            android:name=".QRScanActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <meta-data
                 android:name="com.google.android.gms.vision.DEPENDENCIES"
-                android:value="barcode"/>
+                android:value="barcode" />
+
             <intent-filter>
                 <action android:name="android.intent.action.QRSCAN" />
 
@@ -51,7 +54,8 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".BuildingInfo"></activity>
+        <activity android:name=".BuildingInfo" />
+        <activity android:name=".FloorInfo"></activity>
     </application>
 
 </manifest>
