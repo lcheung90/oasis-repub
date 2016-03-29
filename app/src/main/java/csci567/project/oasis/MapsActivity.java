@@ -29,6 +29,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Vector;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Bind;
@@ -44,8 +47,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             new LatLng(39.725193, -121.848341), new LatLng(39.734038, -121.843255));
 
     private static final LatLng LIBRARY = new LatLng(39.728123, -121.846275);
+    private static final LatLng GLEEN = new LatLng(39.729144, -121.846413);
+    private static final LatLng OCONNEL = new LatLng(39.727725, -121.847566);
+    private static final LatLng YOLO = new LatLng(39.728829, -121.850050);
+    private static final LatLng STUDENTCENTER = new LatLng(39.727210, -121.845747);
     public final static String EXTRA_MARKER = "csci567/project/oasis.MARKER";
-
+    private Vector <LatLng> MarkerLat = new Vector<LatLng>() ;
+    private Vector <String> MarkerName = new Vector<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +66,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    private void initializeMarker(){
+
+
+        MarkerLat.set(0, new LatLng(39.728123, -121.846275));
+        MarkerName.set(0,"Library");
+        MarkerLat.set(1,new LatLng(39.729144, -121.846413));
+        MarkerName.set(1,"Glenn Hall");
+
+
+    }
 
 //    private void addGoogleMap() {
 //        // check if we have got the googleMap already
@@ -76,7 +94,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         // Add a marker in Sydney, Australia, and move the camera.
         LatLng csuChico = new LatLng(39.73, -121.84);
-        mMap.setOnMarkerClickListener( this);
+        mMap.setOnMarkerClickListener(this);
         mMap.addMarker(new MarkerOptions().position(csuChico).title("Marker in Chico State University"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(CHICO, 0));
         markers(mMap);
@@ -88,16 +106,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void markers(GoogleMap googleMap){
+        //initializeMarker();
+
         Marker library = googleMap.addMarker(new MarkerOptions()
                 .position(LIBRARY)
-                .title("Library")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                .alpha(0)
+                .title("Meriam Library"));
+        Marker Glenn = googleMap.addMarker(new MarkerOptions()
+                .position(GLEEN)
+                .alpha(0)
+                .title("Gleen Hall"));
     }
 
 
     public boolean onMarkerClick(Marker marker) {
 
         Intent intent = new Intent(this, BuildingInfo.class);
+
         String title = marker.getTitle();
         intent.putExtra(EXTRA_MARKER, title);
         //i.putExtra("str1", db.getCulturaName(arg0.getTitle()).getDescription());
