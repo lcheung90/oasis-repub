@@ -7,13 +7,13 @@
     <string name="rewards">Rewards</string>
     <string name="title_activity_location">Map</string>
     <string name="title_activity_locate">Map</string>
-    <string name="title_activity_rewards">activity rewards</string>
+
 
 
     <string name="title_activity_main">MainActivity</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
 
 
     <string name="title_activity_maps">Map</string>

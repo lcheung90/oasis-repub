@@ -11,7 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-<<<<<<< HEAD
+
 import android.widget.Toast;
 
 
@@ -23,16 +23,15 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-=======
+
 import android.widget.TextView;
->>>>>>> refs/remotes/origin/master
+
 
 
 public class HomeActivity extends AppCompatActivity {
 
-<<<<<<< HEAD
-    private static final String TAG = "HomeActivity";
 
+    private static final String TAG = "HomeActivity";
     //private GoogleApiClient client;
 
     //Mock scan history data - until we get QR scan working with a database
@@ -47,8 +46,9 @@ public class HomeActivity extends AppCompatActivity {
     @OnClick(R.id.scan_button)
     public void scan() {
         Log.d(TAG, "Scan Button Clicked");
-        //Intent scan = new Intent(HomeActivity.this, )
-        //Toast.makeText(Context)
+
+        Intent scanner = new Intent(HomeActivity.this, QRScanActivity.class);
+        startActivityForResult(scanner,0);
     }
 
     @OnClick(R.id.locate_button)
@@ -57,30 +57,20 @@ public class HomeActivity extends AppCompatActivity {
 
         Intent locate = new Intent(HomeActivity.this, MapsActivity.class);
         startActivity(locate);
-        //Toast.makeText(Context)
     }
 
 
+    @Bind(R.id.tv_debug_qrresult) TextView barcodeInfo;
 
-=======
-	private TextView barcodeInfo;
-    private Button scanButton;
->>>>>>> refs/remotes/origin/master
+	//private TextView barcodeInfo;
+    //private Button scanButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-		scanButton = (Button) findViewById(R.id.btn_scan);
-        barcodeInfo = (TextView) findViewById(R.id.tv_debug_qrresult);
-        scanButton.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
-                        Intent scanner = new Intent(HomeActivity.this, QRScanActivity.class);
-                        startActivityForResult(scanner,0);
-                    }
-                }
-        );
 
+        //barcodeInfo = (TextView) findViewById(R.id.tv_debug_qrresult);
         ButterKnife.bind(this);
 
         //RecyclerView - one option for displaying our QR scan recent history
