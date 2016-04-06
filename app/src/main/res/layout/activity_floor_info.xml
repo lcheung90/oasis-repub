@@ -9,4 +9,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="csci567.project.oasis.FloorInfo">
 
+    <TextView
+        android:id="@+id/Ftitle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/FLoorTitle"/>
+    <TextView
+        android:id="@+id/Directions"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/Ftitle"
+        android:layout_height="match_parent"
+        android:text="@string/directions"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan"
+        android:id="@+id/bscan"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/Directions" />
+
 </RelativeLayout>

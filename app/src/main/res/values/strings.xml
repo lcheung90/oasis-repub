@@ -8,9 +8,11 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
     <string name="start">Start</string>
-    <string name="f1">Floor 1</string>
+    <string name="f1"> </string>
     <string name="f2">Floor 2</string>
     <string name="f3">Floor 3</string>
     <string name="f4">Floor 4</string>
     <string name="title">Title</string>
+    <string name="FLoorTitle">Title</string>
+    <string name="directions">The water fountains are by the bathrooms</string>
 </resources>
