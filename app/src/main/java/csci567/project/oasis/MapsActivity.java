@@ -109,6 +109,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    /**
+     * Adding clickable markers to the mMap
+     * The coordinates where declared as private static variable in the beginning of this clas
+     * */
     public void markers(GoogleMap googleMap){
         Marker library = googleMap.addMarker(new MarkerOptions().position(LIBRARY).alpha(0).title("Meriam Library"));
         Marker Glenn = googleMap.addMarker(new MarkerOptions().position(GLEEN).alpha(0).title("Gleen Hall"));
@@ -137,7 +141,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Marker StudentCenter = googleMap.addMarker(new MarkerOptions().position(STUDENTCENTER).alpha(0).title("Student Center"));
     }
 
-
+    /**
+     *  Once the Marker, that is invisible on the Map, is clicked
+     *  it will start another  activity ( intent)
+     *  and pass an Extra variable (info) to the next activity, in this case it is the title of the marker ( building name)
+     * */
     public boolean onMarkerClick(Marker marker) {
 
         Intent intent = new Intent(this, BuildingInfo.class);
