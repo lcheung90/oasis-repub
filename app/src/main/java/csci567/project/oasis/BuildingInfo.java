@@ -41,44 +41,36 @@ public class BuildingInfo extends Activity {
         LinearLayout linearL= (LinearLayout) findViewById(R.id.linearlayout_id);
 
 
-       for(int i =1; i < 4 ; i++ ){
+       for(int i =0; i < 4 ; i++ ){
            //View view = getLayoutInflater().inflate(R.layout.button, null);
 
 
            View view = getLayoutInflater().inflate(R.layout.button,linearL,false);
            Button b = (Button) view.findViewById(R.id.custom_button);
-           b.setText("Floor " + i);
+           b.setText("Floor " + i );
+             linearL.setId(i);
 
 
-           linearL.addView(view);
-           final String floorNumber = (String) b.getText();
-           b.setOnClickListener(
-                   new Button.OnClickListener() {
-                       public void onClick(View v) {
-
-                           Intent floorIntent = new Intent(BuildingInfo.this, FloorInfo.class);
-                           floorIntent.putExtra(EXTRA_FLOOR, floorNumber);
-                           startActivity(floorIntent);
-                       }
-                   }
-           );
-
+        linearL.addView(view);
 
        }
 
 
-       View view = getLayoutInflater().inflate(R.layout.button,linearL,false);
-        Button floor = (Button) view.findViewById(R.id.custom_button);
-
-
-
-//        public void testClick(View view) {
 //
-//            Intent floorIntent = new Intent(BuildingInfo.this, FloorInfo.class);
-//            floorIntent.putExtra(EXTRA_FLOOR, floorNumber);
-//            startActivity(floorIntent);
-//        }
+//        Button floor = (Button) findViewById(R.id.b1floor);
+//        final String floorNumber = (String) floor.getText();
 //
+//        floor.setOnClickListener(
+//                new Button.OnClickListener() {
+//                    public void onClick(View v) {
+//
+//                        Intent floorIntent = new Intent(BuildingInfo.this, FloorInfo.class);
+//                        floorIntent.putExtra(EXTRA_FLOOR, floorNumber);
+//                        startActivity(floorIntent);
+//                    }
+//                }
+//        );
+
 
 
 

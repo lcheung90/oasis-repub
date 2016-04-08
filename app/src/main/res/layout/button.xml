@@ -7,8 +7,7 @@
     android:layout_centerHorizontal="true"
     android:layout_marginTop="45dp"
     android:text="@string/f1"
-    android:id="@+id/custom_button"
-    android:onClick="testClick">
+    android:id="@+id/custom_button">
 
 
 </Button>
