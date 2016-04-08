@@ -10,6 +10,8 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+
     }
     buildTypes {
         release {
@@ -23,11 +25,34 @@ android {
     }
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'LICENSE.txt'
     }
+
+    // Resolve dependency differences between app and tests
+    configurations.all {
+        resolutionStrategy.force 'com.android.support:support-annotations:23.2.0'
+    }
+
+
+
 
 }
 
 dependencies {
+
+    compile group: 'com.ibm.mobilefirstplatform.clientsdk.android',
+            name:'core',
+            version: '1.+',
+            ext: 'aar',
+            transitive: true
+    compile group: 'com.ibm.mobilefirstplatform.clientsdk.android',
+            name:'googleauthentication',
+            version: '2.+',
+            ext: 'aar',
+            transitive: true
+
+
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.1'
@@ -37,7 +62,16 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.2.1'
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.google.android.gms:play-services-auth:8.4.0'
+    //compile('com.github.afollestad.material-dialogs:core:0.8.5.7@aar') {
+        //transitive = true
+
+
+    // include this if you're targeting Android. If you also want datastore encryption
+    // you will need to include cloudant-sync-datastore-android-encryption instead (see below).
+    //compile group: 'com.cloudant', name: 'cloudant-sync-datastore-android', version:'latest.release'
+    // include this if you're targeting Android and want datastore encryption.
+    //compile group: 'com.cloudant', name: 'cloudant-sync-datastore-android-encryption', version:'latest.release'
+
 
 }
 
-//apply plugin: 'com.google.gms.google-services'

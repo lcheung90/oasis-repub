@@ -1,16 +1,27 @@
 <resources>
     <string name="app_name">Oasis</string>
 
+
+    <string name="desc_google_icon">Google Logo</string>
+    <string name="title_activity_login">Google Sign-In</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="loading">Loading</string>
+    <string name="signed_in">Signed In</string>
+    <string name="signed_out">Signed Out</string>
+
+
+    <string name="title_activity_main">MainActivity</string>
     <string name="scan_button_text">SCAN</string>
     <string name="locate_button_text">LOCATE</string>
     <string name="scan_history_text">Scan History</string>
     <string name="rewards">Rewards</string>
+
     <string name="title_activity_location">Map</string>
     <string name="title_activity_locate">Map</string>
 
 
 
-    <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
@@ -23,5 +34,7 @@
     <string name="f3">Floor 3</string>
     <string name="f4">Floor 4</string>
     <string name="title">Title</string>
+
+
 
 </resources>
