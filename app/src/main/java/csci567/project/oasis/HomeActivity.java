@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cloudant.client.api.ClientBuilder;
 import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
+import com.cloudant.client.org.lightcouch.NoDocumentException;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -24,17 +26,35 @@ public class HomeActivity extends AppCompatActivity {
     private Database db = client.database("waterfountains", false);
 
     private class AsyncTaskRunner extends AsyncTask<String,String, String>{
+        private Exception exceptionToBeThrown;
 
         @Override
         protected String doInBackground(String... params){
             String tmp_id = params[0];
-            WaterFountain wfr = db.find(WaterFountain.class, tmp_id);
-            return Short.toString(wfr.getPoints());
+            WaterFountain wfr;
+            try {
+                wfr = db.find(WaterFountain.class, tmp_id);
+                return Short.toString(wfr.getPoints());
+            }
+            catch(Exception e)
+            {
+                exceptionToBeThrown = e;
+            }
+            return null;
         }
 
         @Override
         protected void onPostExecute(String result){
-            barcodeInfo.setText(result);
+            // Check if exception exists.
+            if (exceptionToBeThrown != null) {
+                if (exceptionToBeThrown instanceof NoDocumentException) {
+                    Toast.makeText(HomeActivity.this, "Not an Oasis QRcode", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(HomeActivity.this, "Something went wrong, try again", Toast.LENGTH_SHORT).show();
+            }
+            else
+                barcodeInfo.setText(result);
         }
     }
 
