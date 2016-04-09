@@ -18,12 +18,7 @@ public class HomeActivity extends AppCompatActivity {
 
 	private TextView barcodeInfo;
     private Button scanButton;
-
-    private CloudantClient client = ClientBuilder.account("lamamafalsa")
-            .username("lamamafalsa")
-            .password("1234567890")
-            .build();
-    private Database db = client.database("waterfountains", false);
+    private Database db = CloudantSingleton.getInstance().getClient().database("waterfountains",false);
 
     private class AsyncTaskRunner extends AsyncTask<String,String, String>{
         private Exception exceptionToBeThrown;
