@@ -1,17 +1,43 @@
 package csci567.project.oasis;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cloudant.client.api.ClientBuilder;
+import com.cloudant.client.api.CloudantClient;
+import com.cloudant.client.api.Database;
 
 public class HomeActivity extends AppCompatActivity {
 
 	private TextView barcodeInfo;
     private Button scanButton;
+
+    private CloudantClient client = ClientBuilder.account("lamamafalsa")
+            .username("lamamafalsa")
+            .password("1234567890")
+            .build();
+    private Database db = client.database("waterfountains", false);
+
+    private class AsyncTaskRunner extends AsyncTask<String,String, String>{
+
+        @Override
+        protected String doInBackground(String... params){
+            String tmp_id = params[0];
+            WaterFountain wfr = db.find(WaterFountain.class, tmp_id);
+            return Short.toString(wfr.getPoints());
+        }
+
+        @Override
+        protected void onPostExecute(String result){
+            barcodeInfo.setText(result);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +70,11 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             Bundle b = data.getExtras();
             String s = b.getString("info");
-            barcodeInfo.setText(s);
+            AsyncTaskRunner runner = new AsyncTaskRunner();
+            runner.execute(s);
         }
     }
 }
