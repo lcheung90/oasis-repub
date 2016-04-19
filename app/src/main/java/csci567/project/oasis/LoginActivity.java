@@ -76,14 +76,7 @@ public class LoginActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Views
         //mStatusTextView = (TextView) findViewById(R.id.status);
-
-        // Button listeners
-        //findViewById(R.id.sign_in_button).setOnClickListener(this);
-        //findViewById(R.id.sign_out_button).setOnClickListener(this);
-        //findViewById(R.id.disconnect_button).setOnClickListener(this);
-
 
 
         // Configure sign-in to request the user's ID, email address, and basic
@@ -188,7 +181,7 @@ public class LoginActivity extends AppCompatActivity implements
 
 
     /**
-     * Shows the progress UI and hides the login form. Bryan's lecture16 example
+     * Shows the cool progress UI and hides the login form. Bryan's lecture16 example
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
