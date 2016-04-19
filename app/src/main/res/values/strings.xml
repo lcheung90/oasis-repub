@@ -34,7 +34,8 @@
     <string name="f3">Floor 3</string>
     <string name="f4">Floor 4</string>
     <string name="title">Title</string>
-
+    <string name="title_building_info">Building Info</string>
+    <string name="permission_rationale">Accounts permissions are needed for login via Google</string>
 
 
 </resources>
