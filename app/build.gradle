@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "csci567.project.oasis"
-        minSdkVersion 22
+        minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -26,6 +26,9 @@ android {
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
         exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/NOTICE'
     }
 
     // Resolve dependency differences between app and tests
@@ -39,7 +42,7 @@ android {
 }
 
 dependencies {
-
+/*
     compile group: 'com.ibm.mobilefirstplatform.clientsdk.android',
             name:'core',
             version: '1.+',
@@ -50,7 +53,7 @@ dependencies {
             version: '2.+',
             ext: 'aar',
             transitive: true
-
+*/
 
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -59,10 +62,12 @@ dependencies {
     compile 'com.android.support:design:23.2.1'
 
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.android.support:cardview-v7:23.2.1'
     compile 'com.android.support:recyclerview-v7:23.2.1'
+
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.google.android.gms:play-services-auth:8.4.0'
-    //compile 'com.firebase:firebase-client-android:2.5.2'     SETUP ON WEBSITE d00d!!!
+    compile 'com.firebase:firebase-client-android:2.5.2'     //SETUP ON WEBSITE d00d!!!
     //compile('com.github.afollestad.material-dialogs:core:0.8.5.7@aar') {
         //transitive = true
 

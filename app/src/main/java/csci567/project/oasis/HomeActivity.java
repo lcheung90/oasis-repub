@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private static final String TAG = "HomeActivity";
-    private GoogleApiClient client;
+    //private GoogleApiClient client;
 
     //Mock scan history data - until we get QR scan working with a database
     //String[] code = {"650VC2H", "B71FP2Z", "7NFRJSO", "PDJ87OJ", "VN8GRXY", "72OJI2H", "650VC2H"};
@@ -56,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
         Log.d(TAG, "Locate Button Clicked");
 
         Intent locate = new Intent(HomeActivity.this, MapsActivity.class);
-        startActivity(locate);
+        startActivity(locate); //startActivityForResult
     }
 
 
@@ -77,7 +77,6 @@ public class HomeActivity extends AppCompatActivity {
         //RecyclerView qr_scan_history = (RecyclerView) findViewById(R.id.scan_history);
         //RecyclerView.Adapter adapter = new RecyclerAdapter(code, loc, day);
         //RecyclerView.LayoutManager layout_manager = new LinearLayoutManager(this);
-
         //qr_scan_history.setLayoutManager(layout_manager);
         //qr_scan_history.setHasFixedSize(true);
         //qr_scan_history.setAdapter(adapter);
@@ -85,7 +84,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 

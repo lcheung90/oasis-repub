@@ -54,21 +54,22 @@ public class LoginActivity extends AppCompatActivity implements
 
     private static final String TAG = "LoginInActivity";
     private static final int RC_SIGN_IN = 9001;
-
-
     private static final int REQUEST_GET_ACCOUNTS = 0;
 
     /* Data from the authenticated user */
     //public static AuthData mAuthData;
 
     private GoogleApiClient mGoogleApiClient;
-    private TextView mStatusTextView;
-    private ProgressDialog mProgressDialog;
-
 
     // UI references.
+    private TextView mStatusTextView;
+    private ProgressDialog mProgressDialog;
     private View mProgressView;
     private View mLoginFormView;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,7 +188,7 @@ public class LoginActivity extends AppCompatActivity implements
 
 
     /**
-     * Shows the progress UI and hides the login form.
+     * Shows the progress UI and hides the login form. Bryan's lecture16 example
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
