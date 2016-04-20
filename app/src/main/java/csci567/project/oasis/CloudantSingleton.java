@@ -12,9 +12,9 @@ public class CloudantSingleton {
     private CloudantClient client;
 
     private CloudantSingleton(){
-        client =  ClientBuilder.account("lamamafalsa")
-                .username("lamamafalsa")
-                .password("1234567890")
+        client =  ClientBuilder.account("1ceb4ff2-441b-4bd7-bab3-cafbae69621b-bluemix")
+                .username("1ceb4ff2-441b-4bd7-bab3-cafbae69621b-bluemix")
+                .password("3efd61b3011f6dc80ef998dac5765b80b065656f6228f4cc1158e099a6ac4f27")
                 .build();
     }
 
