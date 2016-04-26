@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,17 +15,24 @@ import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.cloudant.client.org.lightcouch.NoDocumentException;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
+import com.ibm.mobilefirstplatform.clientsdk.android.core.api.Request;
+import com.ibm.mobilefirstplatform.clientsdk.android.core.api.Response;
+import com.ibm.mobilefirstplatform.clientsdk.android.core.api.ResponseListener;
+import com.ibm.mobilefirstplatform.clientsdk.android.security.api.AuthorizationManager;
 import com.ibm.mobilefirstplatform.clientsdk.android.security.googleauthentication.GoogleAuthenticationManager;
+
+import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements ResponseListener {
 
 	private TextView barcodeInfo;
     private Button scanButton;
     private Database db = CloudantSingleton.getInstance().getClient().database("waterfountains",false);
     private static final int SCAN_REQUEST_CODE = 8;
     private static final int AUTH_REQUEST_CODE = 16;
+    private static final String TAG = "Oasis-DEBUG" ;
 
     private class AsyncTaskRunner extends AsyncTask<String,String, String>{
         private Exception exceptionToBeThrown;
@@ -71,10 +79,12 @@ public class HomeActivity extends AppCompatActivity {
                     "http://csci567oasis.mybluemix.net",
                     "8b14e585-8a43-41b0-ba37-4746786bbf78");
         } catch (MalformedURLException e) {
-            Toast.makeText(HomeActivity.this, "Authentication server error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(HomeActivity.this, "Authentication server configuration error", Toast.LENGTH_SHORT).show();
         }
 
         GoogleAuthenticationManager.getInstance().register(this);
+
+        new Request(BMSClient.getInstance().getBluemixAppRoute() + "/protected", Request.GET).send(this, this);
 
 
         scanButton.setOnClickListener(
@@ -118,5 +128,22 @@ public class HomeActivity extends AppCompatActivity {
                         .onActivityResultCalled(requestCode, resultCode, data);
                 break;
         }
+    }
+
+    @Override
+    public void onSuccess (Response response) {
+        Log.d(TAG, "onSuccess :: " + response.getResponseText());
+        Log.d(TAG, AuthorizationManager.getInstance().getUserIdentity().toString());
+    }
+    @Override
+    public void onFailure (Response response, Throwable t, JSONObject extendedInfo) {
+        if (null != t) {
+            Log.d(TAG, "onFailure :: " + t.getMessage());
+        } else if (null != extendedInfo) {
+            Log.d(TAG, "onFailure :: " + extendedInfo.toString());
+        } else {
+            Log.d(TAG, "onFailure :: " + response.getResponseText());
+        }
+        Toast.makeText(HomeActivity.this,"Unable to login, try again later",Toast.LENGTH_SHORT).show();
     }
 }
