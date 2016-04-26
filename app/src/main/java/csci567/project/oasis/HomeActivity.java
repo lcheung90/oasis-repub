@@ -2,6 +2,7 @@ package csci567.project.oasis;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,10 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cloudant.client.api.ClientBuilder;
-import com.cloudant.client.api.CloudantClient;
 import com.cloudant.client.api.Database;
 import com.cloudant.client.org.lightcouch.NoDocumentException;
+import com.google.android.gms.common.SignInButton;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.BMSClient;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.Request;
 import com.ibm.mobilefirstplatform.clientsdk.android.core.api.Response;
@@ -29,10 +29,13 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
 
 	private TextView barcodeInfo;
     private Button scanButton;
+    private SignInButton signIn;
+    private FloatingActionButton signOut;
     private Database db = CloudantSingleton.getInstance().getClient().database("waterfountains",false);
     private static final int SCAN_REQUEST_CODE = 8;
     private static final int AUTH_REQUEST_CODE = 16;
-    private static final String TAG = "Oasis-DEBUG" ;
+    private static final String TAG = "Oasis-DEBUG";
+    private boolean auth = false;
 
     private class AsyncTaskRunner extends AsyncTask<String,String, String>{
         private Exception exceptionToBeThrown;
@@ -73,6 +76,8 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         setContentView(R.layout.activity_home);
 		scanButton = (Button) findViewById(R.id.btn_scan);
         barcodeInfo = (TextView) findViewById(R.id.tv_debug_qrresult);
+        signIn = (SignInButton) findViewById(R.id.sign_in_button);
+        signOut = (FloatingActionButton) findViewById(R.id.fab);
 
         try {
             BMSClient.getInstance().initialize(getApplicationContext(),
@@ -91,9 +96,34 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         Intent scanner = new Intent(HomeActivity.this, QRScanActivity.class);
-                        startActivityForResult(scanner,SCAN_REQUEST_CODE);
+                        startActivityForResult(scanner, SCAN_REQUEST_CODE);
                     }
                 }
+        );
+
+        signIn.setOnClickListener(
+            new SignInButton.OnClickListener() {
+                public void onClick(View v) {
+                    if(!auth) {
+                        GoogleAuthenticationManager.getInstance().register(HomeActivity.this);
+                        new Request(BMSClient.getInstance().getBluemixAppRoute() + "/protected", Request.GET).send(HomeActivity.this, HomeActivity.this);
+                        Toast.makeText(HomeActivity.this, "login", Toast.LENGTH_SHORT).show();
+                        auth = true;
+                    }
+                }
+            }
+        );
+
+        signOut.setOnClickListener(
+            new FloatingActionButton.OnClickListener() {
+                public void onClick(View v) {
+                    if(auth) {
+                        GoogleAuthenticationManager.getInstance().logout(getApplicationContext(), null);
+                        Toast.makeText(HomeActivity.this, "logout", Toast.LENGTH_SHORT).show();
+                        auth = false;
+                    }
+                }
+            }
         );
 
         Button buttonLocate = (Button) findViewById(R.id.btn_locate);
@@ -134,7 +164,9 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
     public void onSuccess (Response response) {
         Log.d(TAG, "onSuccess :: " + response.getResponseText());
         Log.d(TAG, AuthorizationManager.getInstance().getUserIdentity().toString());
+        auth = true;
     }
+
     @Override
     public void onFailure (Response response, Throwable t, JSONObject extendedInfo) {
         if (null != t) {
