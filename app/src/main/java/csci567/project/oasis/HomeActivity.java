@@ -1,8 +1,12 @@
 package csci567.project.oasis;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +38,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
     private Database db = CloudantSingleton.getInstance().getClient().database("waterfountains",false);
     private static final int SCAN_REQUEST_CODE = 8;
     private static final int AUTH_REQUEST_CODE = 16;
+    private static final int PERMISSION_REQUEST_GET_ACCOUNTS = 0;
     private static final String TAG = "Oasis-DEBUG";
     private boolean auth = false;
 
@@ -87,10 +92,12 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
             Toast.makeText(HomeActivity.this, "Authentication server configuration error", Toast.LENGTH_SHORT).show();
         }
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
+            signIn.setClickable(false);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.GET_ACCOUNTS}, PERMISSION_REQUEST_GET_ACCOUNTS);
+        }
+
         GoogleAuthenticationManager.getInstance().register(this);
-
-        new Request(BMSClient.getInstance().getBluemixAppRoute() + "/protected", Request.GET).send(this, this);
-
 
         scanButton.setOnClickListener(
                 new Button.OnClickListener() {
@@ -105,7 +112,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
             new SignInButton.OnClickListener() {
                 public void onClick(View v) {
                     if(!auth) {
-                        GoogleAuthenticationManager.getInstance().register(HomeActivity.this);
                         new Request(BMSClient.getInstance().getBluemixAppRoute() + "/protected", Request.GET).send(HomeActivity.this, HomeActivity.this);
                         Toast.makeText(HomeActivity.this, "login", Toast.LENGTH_SHORT).show();
                         auth = true;
@@ -117,11 +123,9 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         signOut.setOnClickListener(
             new FloatingActionButton.OnClickListener() {
                 public void onClick(View v) {
-                    if(auth) {
-                        GoogleAuthenticationManager.getInstance().logout(getApplicationContext(), null);
-                        Toast.makeText(HomeActivity.this, "logout", Toast.LENGTH_SHORT).show();
-                        auth = false;
-                    }
+                    Toast.makeText(HomeActivity.this, "logout", Toast.LENGTH_SHORT).show();
+                    auth = false;
+                    GoogleAuthenticationManager.getInstance().logout(getApplicationContext(), null);
                 }
             }
         );
@@ -153,7 +157,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
                     runner.execute(s);
                 }
                 break;
-            case AUTH_REQUEST_CODE:
+            default:
                 GoogleAuthenticationManager.getInstance()
                         .onActivityResultCalled(requestCode, resultCode, data);
                 break;
@@ -177,5 +181,19 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
             Log.d(TAG, "onFailure :: " + response.getResponseText());
         }
         Toast.makeText(HomeActivity.this,"Unable to login, try again later",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_GET_ACCOUNTS: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    signIn.setClickable(true);
+
+                } else {
+                    signIn.setClickable(false);
+                }
+            }
+        }
     }
 }
