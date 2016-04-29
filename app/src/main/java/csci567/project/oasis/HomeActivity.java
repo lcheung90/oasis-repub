@@ -111,11 +111,8 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         signIn.setOnClickListener(
             new SignInButton.OnClickListener() {
                 public void onClick(View v) {
-                    if(!auth) {
-                        new Request(BMSClient.getInstance().getBluemixAppRoute() + "/protected", Request.GET).send(HomeActivity.this, HomeActivity.this);
-                        Toast.makeText(HomeActivity.this, "login", Toast.LENGTH_SHORT).show();
-                        auth = true;
-                    }
+                    new Request(BMSClient.getInstance().getBluemixAppRoute() + "/protected", Request.GET).send(HomeActivity.this, HomeActivity.this);
+                    Toast.makeText(HomeActivity.this, "login", Toast.LENGTH_SHORT).show();
                 }
             }
         );
@@ -124,7 +121,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
             new FloatingActionButton.OnClickListener() {
                 public void onClick(View v) {
                     Toast.makeText(HomeActivity.this, "logout", Toast.LENGTH_SHORT).show();
-                    auth = false;
                     GoogleAuthenticationManager.getInstance().logout(getApplicationContext(), null);
                 }
             }
@@ -181,6 +177,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
             Log.d(TAG, "onFailure :: " + response.getResponseText());
         }
         Toast.makeText(HomeActivity.this,"Unable to login, try again later",Toast.LENGTH_SHORT).show();
+        GoogleAuthenticationManager.getInstance().logout(getApplicationContext(), null);
     }
 
     @Override
