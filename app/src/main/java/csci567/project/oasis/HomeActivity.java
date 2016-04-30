@@ -31,47 +31,56 @@ import java.net.MalformedURLException;
 
 public class HomeActivity extends AppCompatActivity implements ResponseListener {
 
-	private TextView barcodeInfo;
+    private TextView barcodeInfo;
     private Button scanButton;
     private SignInButton signIn;
     private FloatingActionButton signOut;
-    private Database db = CloudantSingleton.getInstance().getClient().database("waterfountains",false);
+    private Database db = CloudantSingleton.getInstance().getClient().database("waterfountains", false);
     private static final int SCAN_REQUEST_CODE = 8;
     private static final int AUTH_REQUEST_CODE = 16;
     private static final int PERMISSION_REQUEST_GET_ACCOUNTS = 0;
     private static final String TAG = "Oasis-DEBUG";
     private boolean auth = false;
 
-    private class AsyncTaskRunner extends AsyncTask<String,String, String>{
+    private class AsyncTaskRunner extends AsyncTask<String, String, String> {
         private Exception exceptionToBeThrown;
 
         @Override
-        protected String doInBackground(String... params){
+        protected String doInBackground(String... params) {
             String tmp_id = params[0];
             WaterFountain wfr;
             try {
                 wfr = db.find(WaterFountain.class, tmp_id);
                 return Short.toString(wfr.getPoints());
-            }
-            catch(Exception e)
-            {
+            } catch (Exception e) {
                 exceptionToBeThrown = e;
             }
             return null;
         }
 
         @Override
-        protected void onPostExecute(String result){
+        protected void onPostExecute(String result) {
             // Check if exception exists.
             if (exceptionToBeThrown != null) {
                 if (exceptionToBeThrown instanceof NoDocumentException) {
                     Toast.makeText(HomeActivity.this, "Not an Oasis QRcode", Toast.LENGTH_SHORT).show();
-                }
-                else
+                } else
                     Toast.makeText(HomeActivity.this, "Something went wrong, try again", Toast.LENGTH_SHORT).show();
-            }
-            else
+            } else
                 barcodeInfo.setText(result);
+        }
+    }
+
+    private class AsyncButtonToggle extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            togglebuttons();
         }
     }
 
@@ -79,7 +88,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-		scanButton = (Button) findViewById(R.id.btn_scan);
+        scanButton = (Button) findViewById(R.id.btn_scan);
         barcodeInfo = (TextView) findViewById(R.id.tv_debug_qrresult);
         signIn = (SignInButton) findViewById(R.id.sign_in_button);
         signOut = (FloatingActionButton) findViewById(R.id.fab);
@@ -98,6 +107,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         }
 
         GoogleAuthenticationManager.getInstance().register(this);
+        togglebuttons();
 
         scanButton.setOnClickListener(
                 new Button.OnClickListener() {
@@ -122,6 +132,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
                 public void onClick(View v) {
                     Toast.makeText(HomeActivity.this, "logout", Toast.LENGTH_SHORT).show();
                     GoogleAuthenticationManager.getInstance().logout(getApplicationContext(), null);
+                    togglebuttons();
                 }
             }
         );
@@ -142,9 +153,26 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        togglebuttons();
+    }
+
+    private void togglebuttons() {
+        auth = AuthorizationManager.getInstance().getCachedAuthorizationHeader() != null;
+        if (auth) {
+            signIn.setVisibility(View.INVISIBLE);
+            signOut.setVisibility(View.VISIBLE);
+        } else {
+            signOut.setVisibility(View.INVISIBLE);
+            signIn.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode) {
+        switch (requestCode) {
             case SCAN_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
                     Bundle b = data.getExtras();
@@ -161,14 +189,15 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
     }
 
     @Override
-    public void onSuccess (Response response) {
+    public void onSuccess(Response response) {
         Log.d(TAG, "onSuccess :: " + response.getResponseText());
         Log.d(TAG, AuthorizationManager.getInstance().getUserIdentity().toString());
-        auth = true;
+        AsyncButtonToggle at = new AsyncButtonToggle();
+        at.execute();
     }
 
     @Override
-    public void onFailure (Response response, Throwable t, JSONObject extendedInfo) {
+    public void onFailure(Response response, Throwable t, JSONObject extendedInfo) {
         if (null != t) {
             Log.d(TAG, "onFailure :: " + t.getMessage());
         } else if (null != extendedInfo) {
@@ -176,8 +205,9 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         } else {
             Log.d(TAG, "onFailure :: " + response.getResponseText());
         }
-        Toast.makeText(HomeActivity.this,"Unable to login, try again later",Toast.LENGTH_SHORT).show();
+        Toast.makeText(HomeActivity.this, "Unable to login, try again later", Toast.LENGTH_SHORT).show();
         GoogleAuthenticationManager.getInstance().logout(getApplicationContext(), null);
+
     }
 
     @Override
