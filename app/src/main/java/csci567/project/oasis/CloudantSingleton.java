@@ -18,6 +18,7 @@ public class CloudantSingleton {
                 .build();
     }
 
+
     public static CloudantSingleton getInstance(){
         if(mInstance == null){
             mInstance = new CloudantSingleton();
