@@ -34,6 +34,7 @@ import java.net.MalformedURLException;
 public class HomeActivity extends AppCompatActivity implements ResponseListener {
 
     private TextView barcodeInfo;
+    private TextView scan_history;
     private Button scanButton;
     private SignInButton signIn;
     private FloatingActionButton signOut;
@@ -92,6 +93,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         setContentView(R.layout.activity_home);
         scanButton = (Button) findViewById(R.id.btn_scan);
         barcodeInfo = (TextView) findViewById(R.id.tv_debug_qrresult);
+        scan_history = (TextView) findViewById(R.id.scan_history);
         signIn = (SignInButton) findViewById(R.id.sign_in_button);
         signOut = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -245,8 +247,8 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         //noinspection SimplifiableIfStatement
         if (id == R.id.redeem_rewards) {
             Log.d(TAG, "Rewards Selected");
-            //Intent redeem = new Intent(HomeActivity.this, Rewards.class);
-            //startActivity(redeem);
+            Intent redeem = new Intent(HomeActivity.this, Rewards.class);
+            startActivity(redeem);
             return true;
         }
 
