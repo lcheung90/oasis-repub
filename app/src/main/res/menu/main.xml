@@ -5,8 +5,7 @@
         android:id="@+id/redeem_rewards"
         android:orderInCategory="100"
         android:title="@string/Rewards"
-
+        android:icon="@drawable/ic_giftcard_24dp"
         app:showAsAction="ifRoom" />
-
 
 </menu>
