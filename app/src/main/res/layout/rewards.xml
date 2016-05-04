@@ -12,11 +12,37 @@
     <ImageView
         android:id="@+id/reward1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
         android:src="@mipmap/ic_reward_konas"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:id="@+id/reward2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_kinders_reward"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/reward1" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="35 pts - Free chips and drink with purchase of large sandwich."
+        android:id="@+id/konas_reward"
+        android:layout_below="@+id/reward1"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="50 pts - Free large Pulled Pork Sandwich, without chips and drink."
+        android:id="@+id/kinders_reward"
+        android:layout_below="@+id/reward2"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
