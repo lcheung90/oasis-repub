@@ -1,12 +1,14 @@
 package csci567.project.oasis;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,6 +46,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
     private static final int PERMISSION_REQUEST_GET_ACCOUNTS = 0;
     private static final String TAG = "Oasis-DEBUG";
     private boolean auth = false;
+    private String email = "";
 
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
         private Exception exceptionToBeThrown;
@@ -84,6 +87,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             togglebuttons();
+            email = AuthorizationManager.getInstance().getUserIdentity().getDisplayName().toString();
         }
     }
 
@@ -116,8 +120,16 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         scanButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        Intent scanner = new Intent(HomeActivity.this, QRScanActivity.class);
-                        startActivityForResult(scanner, SCAN_REQUEST_CODE);
+                        if(!email.isEmpty()) {
+                            Intent scanner = new Intent(HomeActivity.this, QRScanActivity.class);
+                            startActivityForResult(scanner, SCAN_REQUEST_CODE);
+                        }
+                        else
+                            //Toast.makeText(HomeActivity.this, "Please login", Toast.LENGTH_LONG).show();
+                        new AlertDialog.Builder(HomeActivity.this)
+                                .setMessage("Please login to scan")
+                                .setPositiveButton("OK",null)
+                                .show();
                     }
                 }
         );
@@ -137,6 +149,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
                     Toast.makeText(HomeActivity.this, "logout", Toast.LENGTH_SHORT).show();
                     GoogleAuthenticationManager.getInstance().logout(getApplicationContext(), null);
                     togglebuttons();
+                    email = "";
                 }
             }
         );
