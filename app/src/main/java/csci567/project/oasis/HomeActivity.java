@@ -59,7 +59,10 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
             WaterFountain wfr;
             try {
                 wfr = db.find(WaterFountain.class, tmp_id);
-                return Short.toString(wfr.getPoints());
+                user = user_db.find(User.class,email);
+                user.addPoints(wfr.getPoints());
+                user_db.update(user);
+                return Short.toString(user.getPoints());
             } catch (Exception e) {
                 exceptionToBeThrown = e;
             }
@@ -182,8 +185,9 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
                 System.out.print("it is listening to the button");
                 Intent intent = new Intent(HomeActivity.this, MapsActivity.class);
                 System.out.print("it will start an activity");
-                startActivity(intent);
-
+                Bundle b = new Bundle();
+                startActivityForResult(intent,SCAN_REQUEST_CODE);
+                //finish();
             }
         });
     }
