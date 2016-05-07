@@ -41,12 +41,14 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
     private SignInButton signIn;
     private FloatingActionButton signOut;
     private Database db = CloudantSingleton.getInstance().getClient().database("waterfountains", false);
+    private Database user_db = CloudantSingleton.getInstance().getClient().database("users",false);
     private static final int SCAN_REQUEST_CODE = 8;
     private static final int AUTH_REQUEST_CODE = 16;
     private static final int PERMISSION_REQUEST_GET_ACCOUNTS = 0;
     private static final String TAG = "Oasis-DEBUG";
     private boolean auth = false;
     private String email = "";
+    private User user;
 
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
         private Exception exceptionToBeThrown;
@@ -87,7 +89,24 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             togglebuttons();
-            email = AuthorizationManager.getInstance().getUserIdentity().getDisplayName().toString();
+            //email = AuthorizationManager.getInstance().getUserIdentity().getDisplayName().toString();
+            AsyncDocument asyncDocument = new AsyncDocument();
+            asyncDocument.execute();
+        }
+    }
+
+    private class AsyncDocument extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params){
+            try{
+                user = user_db.find(User.class,email);
+            }
+            catch(NoDocumentException e){
+                user = new User();
+                user.setEmail(email);
+                user_db.save(user);
+            }
+            return null;
         }
     }
 
@@ -128,7 +147,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
                             //Toast.makeText(HomeActivity.this, "Please login", Toast.LENGTH_LONG).show();
                         new AlertDialog.Builder(HomeActivity.this)
                                 .setMessage("Please login to scan")
-                                .setPositiveButton("OK",null)
+                                .setPositiveButton("OK", null)
                                 .show();
                     }
                 }
@@ -178,6 +197,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
     private void togglebuttons() {
         auth = AuthorizationManager.getInstance().getCachedAuthorizationHeader() != null;
         if (auth) {
+            email = AuthorizationManager.getInstance().getUserIdentity().getDisplayName().toString();
             signIn.setVisibility(View.INVISIBLE);
             signOut.setVisibility(View.VISIBLE);
         } else {
