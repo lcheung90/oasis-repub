@@ -92,7 +92,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             togglebuttons();
-            //email = AuthorizationManager.getInstance().getUserIdentity().getDisplayName().toString();
             AsyncDocument asyncDocument = new AsyncDocument();
             asyncDocument.execute();
         }
@@ -147,7 +146,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
                             startActivityForResult(scanner, SCAN_REQUEST_CODE);
                         }
                         else
-                            //Toast.makeText(HomeActivity.this, "Please login", Toast.LENGTH_LONG).show();
                         new AlertDialog.Builder(HomeActivity.this)
                                 .setMessage("Please login to scan")
                                 .setPositiveButton("OK", null)
@@ -187,7 +185,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
                 System.out.print("it will start an activity");
                 Bundle b = new Bundle();
                 startActivityForResult(intent,SCAN_REQUEST_CODE);
-                //finish();
             }
         });
     }
@@ -201,7 +198,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
     private void togglebuttons() {
         auth = AuthorizationManager.getInstance().getCachedAuthorizationHeader() != null;
         if (auth) {
-            email = AuthorizationManager.getInstance().getUserIdentity().getDisplayName().toString();
+            email = AuthorizationManager.getInstance().getUserIdentity().getDisplayName();
             signIn.setVisibility(View.INVISIBLE);
             signOut.setVisibility(View.VISIBLE);
         } else {
