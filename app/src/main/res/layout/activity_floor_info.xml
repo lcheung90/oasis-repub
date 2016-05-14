@@ -26,7 +26,6 @@
         android:text="Scan"
         android:id="@+id/bscan"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/Directions" />
+        android:layout_toEndOf="@+id/Directions" />
 
 </RelativeLayout>
