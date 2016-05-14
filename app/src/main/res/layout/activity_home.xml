@@ -29,11 +29,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text=""
-        android:id="@+id/tv_debug_qrresult"
-        android:layout_below="@+id/btn_locate"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp" />
+        android:id="@+id/tv_userpoints"
+        android:layout_alignBottom="@+id/tv_useremail"
+        android:layout_alignEnd="@+id/fab" />
 
 
     <TextView
@@ -63,4 +63,13 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/fab"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/tv_useremail"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

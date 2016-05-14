@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -51,6 +52,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final LatLng PHYSICALSCIENCE = new LatLng(39.731149, -121.843456);
     public final static String EXTRA_MARKER = "csci567/project/oasis.MARKER";
     private static final LatLng STUDENTCENTER = new LatLng(39.727210, -121.845747);
+    private static final int SCAN_REQUEST_CODE = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,8 +158,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         String title = marker.getTitle();
         intent.putExtra(EXTRA_MARKER, title);
-        startActivity(intent);
+        startActivityForResult(intent,SCAN_REQUEST_CODE);
         return false;
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case SCAN_REQUEST_CODE:
+                if (resultCode == RESULT_OK) {
+                    Bundle b = data.getExtras();
+                    String s = b.getString("info");
+                    Intent i = new Intent();
+                    i.putExtras(b);
+                    setResult(RESULT_OK, i);
+                    finish();
+                }
+                break;
+        }
     }
 
 }
