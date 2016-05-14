@@ -127,7 +127,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-
         Marker Whitney = googleMap.addMarker(new MarkerOptions().position(WHITNEY).alpha(0).title("Whitney Hall"));
         Marker Albert = googleMap.addMarker(new MarkerOptions().position(ALBERT).alpha(0).title("Albert"));
 

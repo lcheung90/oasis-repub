@@ -17,21 +17,17 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
     <TextView
-        android:id="@+id/directions"
+        android:id="@+id/Directions"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@id/Ftitle"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal" />
+        android:layout_below="@+id/Ftitle"
+        android:layout_height="match_parent"
+        android:text="@string/directions"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Scan"
         android:id="@+id/bscan"
-        android:layout_alignBottom="@+id/Ftitle"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

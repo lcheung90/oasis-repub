@@ -29,12 +29,8 @@ public class FloorInfo extends Activity implements ResponseListener {
     private boolean auth = AuthorizationManager.getInstance().getCachedAuthorizationHeader() != null;
     private static final String TAG = "Oasis-DEBUG";
     private Database user_db = CloudantSingleton.getInstance().getClient().database("users",false);
-    private Database direction = CloudantSingleton.getInstance().getClient().database("floors",false);
     private String email = "";
     private User user;
-    private Floor aux;
-    private Floor flr;
-    private TextView direc;
 
     private class AsyncDocument extends AsyncTask<Void, Void, Void> {
         @Override
@@ -52,58 +48,19 @@ public class FloorInfo extends Activity implements ResponseListener {
         }
     }
 
-    private class AsyncDirections extends AsyncTask<String, String, String> {
-        private Exception exceptionToBeThrown;
-
-        @Override
-        protected String doInBackground(String... params) {
-            String tmp_id = params[0];
-            WaterFountain wfr;
-            try {
-                flr = direction.find(Floor.class, tmp_id);
-                return flr.getDirection();
-            } catch (Exception e) {
-                exceptionToBeThrown = e;
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            // Check if exception exists.
-            if (exceptionToBeThrown != null) {
-                if (exceptionToBeThrown instanceof NoDocumentException) {
-                    Toast.makeText(FloorInfo.this, "Not there", Toast.LENGTH_SHORT).show();
-                } else
-                    Toast.makeText(FloorInfo.this, "Something went wrong, try again", Toast.LENGTH_SHORT).show();
-            } else{
-                Toast.makeText(FloorInfo.this, "result: " + result, Toast.LENGTH_SHORT).show();
-                direc.setText(result);
-            }
-
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_floor_info);
 
         TextView title = (TextView) findViewById(R.id.Ftitle);
-        direc = (TextView) findViewById(R.id.directions);
         Intent intent = getIntent();
         String newTitle = intent.getStringExtra(BuildingInfo.EXTRA_FLOOR);
         title.setText(newTitle);
         title.setTextSize(40);
-        //direc.setText("Testing the functionnnnnn!!!!!");
-
 
         GoogleAuthenticationManager.getInstance().register(this);
         Button scanButton = (Button) findViewById(R.id.bscan);
-
-        AsyncDirections asyncDirections = new AsyncDirections();
-        asyncDirections.execute("floor1");
-
 
         scanButton.setOnClickListener(
                 new Button.OnClickListener() {

@@ -16,6 +16,7 @@ import com.cloudant.client.org.lightcouch.NoDocumentException;
 public class BuildingInfo extends Activity {
 
     public final static String EXTRA_FLOOR = "csci567/project/oasis.FLOOR";
+<<<<<<< HEAD
     private Exception exceptionToBeThrown;
     private Database db = CloudantSingleton.getInstance().getClient().database("buildings", false);
     private static int numberFloor;
@@ -26,6 +27,9 @@ public class BuildingInfo extends Activity {
 
 
 
+=======
+    private static final int SCAN_REQUEST_CODE = 8;
+>>>>>>> 5c575b405dbe876e9e1278d73a7be1a3163ede8e
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -41,6 +45,7 @@ public class BuildingInfo extends Activity {
         title.setTextSize(40);
 
 
+<<<<<<< HEAD
 
 
 
@@ -119,5 +124,49 @@ public class BuildingInfo extends Activity {
 
 
 
+=======
+        LinearLayout linearL= (LinearLayout) findViewById(R.id.linearlayout_id);
+
+      // creating buttons dynamically and settin all of them to be clickable
+       for(int i =1; i < 4 ; i++ ){
+
+           // Inflating the button into the Linear Layout from the activity_building_info.xml
+           View view = getLayoutInflater().inflate(R.layout.button,linearL,false);
+           final Button b = (Button) view.findViewById(R.id.custom_button);
+           b.setText("Floor " + i);
+
+           // setting the click Listener for the button that is being created
+           b.setOnClickListener(
+                   new Button.OnClickListener() {
+                       public void onClick(View v) {
+                           final String floorNumber = (String) b.getText();
+                           // starting a new intent and passing the FLoor number on the DEFINED variable EXTRA_FLOOR
+                           Intent floorIntent = new Intent(BuildingInfo.this, FloorInfo.class);
+                           floorIntent.putExtra(EXTRA_FLOOR, floorNumber);
+                           startActivityForResult(floorIntent, SCAN_REQUEST_CODE);
+                       }
+                   }
+           );
+        // Adds the new components ( buttons) to the view that is the activity_building_info.xml
+        linearL.addView(view);
+
+       }
+>>>>>>> 5c575b405dbe876e9e1278d73a7be1a3163ede8e
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case SCAN_REQUEST_CODE:
+                if (resultCode == RESULT_OK) {
+                    Bundle b = data.getExtras();
+                    String s = b.getString("info");
+                    Intent i = new Intent();
+                    i.putExtras(b);
+                    setResult(RESULT_OK, i);
+                    finish();
+                }
+                break;
+        }
     }
 }
+
