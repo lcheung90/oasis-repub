@@ -77,6 +77,7 @@ public class BuildingInfo extends Activity {
                         View view = getLayoutInflater().inflate(R.layout.button,linearL,false);
                         final Button b = (Button) view.findViewById(R.id.custom_button);
                         b.setText("Floor " + i);
+                        
 
                         // setting the click Listener for the button that is being created
                         b.setOnClickListener(

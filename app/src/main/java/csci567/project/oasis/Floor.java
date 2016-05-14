@@ -24,7 +24,7 @@ public class Floor {
     }
 
     public String toString() {
-        return "{ id: " + _id + ",\nrev: " + _rev + ",\ndescription: " + direction + "}";
+        return "{ id: " + _id + ",\nrev: " + _rev + ",\ndirection: " + direction + "}";
     }
 }
 

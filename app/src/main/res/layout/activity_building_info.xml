@@ -19,7 +19,9 @@
         android:layout_width="match_parent"
         android:layout_height="10dp"/>
 
-
+<ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="fill_parent"
         android:id="@+id/linearlayout_id"
@@ -28,25 +30,7 @@
         android:layout_centerHorizontal="true"
         android:orientation="vertical" >
     </LinearLayout>
+</ScrollView>
 
-    <!--<Button-->
-        <!--android:id="@+id/b1floor"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:text="@string/f2"/>-->
-    <!--<Button-->
-        <!--android:id="@+id/b3floor"-->
-        <!--android:layout_below="@+id/b2floor"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:text="@string/f3"/>-->
-    <!--<Button-->
-        <!--android:id="@+id/b4floor"-->
-        <!--android:layout_below="@+id/b3floor"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:text="@string/f4"/>-->
+
 </RelativeLayout>

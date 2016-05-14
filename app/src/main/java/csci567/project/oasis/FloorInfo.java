@@ -102,7 +102,7 @@ public class FloorInfo extends Activity implements ResponseListener {
         Button scanButton = (Button) findViewById(R.id.bscan);
 
         AsyncDirections asyncDirections = new AsyncDirections();
-        asyncDirections.execute("floor1");
+        asyncDirections.execute(newTitle);
 
 
         scanButton.setOnClickListener(
