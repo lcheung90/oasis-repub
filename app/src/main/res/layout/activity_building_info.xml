@@ -7,30 +7,56 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="csci567.project.oasis.BuildingInfo">
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:text="@string/title"/>
+    tools:context="csci567.project.oasis.BuildingInfo"
+    android:background="#ffffff">
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="match_parent"
+        android:id="@+id/imageView"
+        android:src="@drawable/water"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="270dp"
+        android:layout_marginRight="0dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:focusable="false"
+        android:visibility="visible" />
+  <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/RelativeTitle">
+
+  </RelativeLayout>
+
+
 
 <ScrollView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/title"
+    android:layout_alignParentStart="true"
+    android:layout_marginTop="20dp"
+    android:id="@+id/scrollView">
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:id="@+id/linearlayout_id"
         android:layout_height="fill_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true">
     </LinearLayout>
+
 </ScrollView>
 
-
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:layout_gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#074988" />
 </RelativeLayout>
