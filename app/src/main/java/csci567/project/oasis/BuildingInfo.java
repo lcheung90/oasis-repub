@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class BuildingInfo extends Activity {
 
     public final static String EXTRA_FLOOR = "csci567/project/oasis.FLOOR";
+    private static final int SCAN_REQUEST_CODE = 8;
 
     
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class BuildingInfo extends Activity {
                            // starting a new intent and passing the FLoor number on the DEFINED variable EXTRA_FLOOR
                            Intent floorIntent = new Intent(BuildingInfo.this, FloorInfo.class);
                            floorIntent.putExtra(EXTRA_FLOOR, floorNumber);
-                           startActivity(floorIntent);
+                           startActivityForResult(floorIntent, SCAN_REQUEST_CODE);
                        }
                    }
            );
@@ -53,6 +54,21 @@ public class BuildingInfo extends Activity {
         linearL.addView(view);
 
        }
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case SCAN_REQUEST_CODE:
+                if (resultCode == RESULT_OK) {
+                    Bundle b = data.getExtras();
+                    String s = b.getString("info");
+                    Intent i = new Intent();
+                    i.putExtras(b);
+                    setResult(RESULT_OK, i);
+                    finish();
+                }
+                break;
+        }
     }
 }
 

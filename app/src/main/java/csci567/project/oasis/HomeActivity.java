@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,19 +34,38 @@ import java.net.MalformedURLException;
 
 public class HomeActivity extends AppCompatActivity implements ResponseListener {
 
-    private TextView barcodeInfo;
+    private TextView user_points;
+    private TextView user_email;
     private TextView scan_history;
     private Button scanButton;
     private SignInButton signIn;
     private FloatingActionButton signOut;
     private Database db = CloudantSingleton.getInstance().getClient().database("waterfountains", false);
+    private Database user_db = CloudantSingleton.getInstance().getClient().database("users",false);
     private static final int SCAN_REQUEST_CODE = 8;
     private static final int AUTH_REQUEST_CODE = 16;
     private static final int PERMISSION_REQUEST_GET_ACCOUNTS = 0;
     private static final String TAG = "Oasis-DEBUG";
     private boolean auth = false;
+    private String email = "";
+    private User user;
 
-    private class AsyncTaskRunner extends AsyncTask<String, String, String> {
+    private class AsyncGetUser extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params){
+            try{
+                user = user_db.find(User.class,email);
+            }catch(Exception e){}
+            return null;
+        }
+        @Override
+        protected void onPostExecute (Void a){
+            if(user != null)
+                user_points.setText(user.getPoints());
+        }
+    }
+
+    private class AsyncAddPoints extends AsyncTask<String, String, String> {
         private Exception exceptionToBeThrown;
 
         @Override
@@ -54,7 +74,10 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
             WaterFountain wfr;
             try {
                 wfr = db.find(WaterFountain.class, tmp_id);
-                return Short.toString(wfr.getPoints());
+                user = user_db.find(User.class,email);
+                user.addPoints(wfr.getPoints());
+                user_db.update(user);
+                return Short.toString(user.getPoints());
             } catch (Exception e) {
                 exceptionToBeThrown = e;
             }
@@ -70,7 +93,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
                 } else
                     Toast.makeText(HomeActivity.this, "Something went wrong, try again", Toast.LENGTH_SHORT).show();
             } else
-                barcodeInfo.setText(result);
+                user_points.setText(result);
         }
     }
 
@@ -84,6 +107,29 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             togglebuttons();
+            user_email.setText(email);
+            AsyncDocument asyncDocument = new AsyncDocument();
+            asyncDocument.execute();
+        }
+    }
+
+    private class AsyncDocument extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params){
+            try{
+                user = user_db.find(User.class,email);
+            }
+            catch(NoDocumentException e){
+                user = new User();
+                user.setEmail(email);
+                user_db.save(user);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void a){
+            user_points.setText(Integer.toString(user.getPoints()));
         }
     }
 
@@ -92,7 +138,8 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         scanButton = (Button) findViewById(R.id.btn_scan);
-        barcodeInfo = (TextView) findViewById(R.id.tv_debug_qrresult);
+        user_email = (TextView) findViewById(R.id.tv_useremail);
+        user_points = (TextView) findViewById(R.id.tv_userpoints);
         scan_history = (TextView) findViewById(R.id.scan_history);
         signIn = (SignInButton) findViewById(R.id.sign_in_button);
         signOut = (FloatingActionButton) findViewById(R.id.fab);
@@ -111,13 +158,21 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         }
 
         GoogleAuthenticationManager.getInstance().register(this);
+
         togglebuttons();
 
         scanButton.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
-                        Intent scanner = new Intent(HomeActivity.this, QRScanActivity.class);
-                        startActivityForResult(scanner, SCAN_REQUEST_CODE);
+                        if(!email.isEmpty()) {
+                            Intent scanner = new Intent(HomeActivity.this, QRScanActivity.class);
+                            startActivityForResult(scanner, SCAN_REQUEST_CODE);
+                        }
+                        else
+                        new AlertDialog.Builder(HomeActivity.this)
+                                .setMessage("Please login to scan")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 }
         );
@@ -137,6 +192,9 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
                     Toast.makeText(HomeActivity.this, "logout", Toast.LENGTH_SHORT).show();
                     GoogleAuthenticationManager.getInstance().logout(getApplicationContext(), null);
                     togglebuttons();
+                    email = "";
+                    user_email.setText(email);
+                    user_points.setText("");
                 }
             }
         );
@@ -150,8 +208,8 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
                 System.out.print("it is listening to the button");
                 Intent intent = new Intent(HomeActivity.this, MapsActivity.class);
                 System.out.print("it will start an activity");
-                startActivity(intent);
-
+                Bundle b = new Bundle();
+                startActivityForResult(intent,SCAN_REQUEST_CODE);
             }
         });
     }
@@ -160,11 +218,17 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
     protected void onResume() {
         super.onResume();
         togglebuttons();
+        if(!email.isEmpty()) {
+            user_email.setText(email);
+            AsyncDocument asyncDocument = new AsyncDocument();
+            asyncDocument.execute();
+        }
     }
 
     private void togglebuttons() {
         auth = AuthorizationManager.getInstance().getCachedAuthorizationHeader() != null;
         if (auth) {
+            email = AuthorizationManager.getInstance().getUserIdentity().getDisplayName();
             signIn.setVisibility(View.INVISIBLE);
             signOut.setVisibility(View.VISIBLE);
         } else {
@@ -181,7 +245,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
                 if (resultCode == RESULT_OK) {
                     Bundle b = data.getExtras();
                     String s = b.getString("info");
-                    AsyncTaskRunner runner = new AsyncTaskRunner();
+                    AsyncAddPoints runner = new AsyncAddPoints();
                     runner.execute(s);
                 }
                 break;
