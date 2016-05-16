@@ -29,8 +29,17 @@ public class FloorInfo extends Activity implements ResponseListener {
     private boolean auth = AuthorizationManager.getInstance().getCachedAuthorizationHeader() != null;
     private static final String TAG = "Oasis-DEBUG";
     private Database user_db = CloudantSingleton.getInstance().getClient().database("users",false);
+<<<<<<< HEAD
     private String email = "";
     private User user;
+=======
+    private Database direction = CloudantSingleton.getInstance().getClient().database("floors",false);
+    private String email = "";
+    private User user;
+    private Floor aux;
+    private Floor flr;
+    private TextView direc;
+>>>>>>> AnnaFinalBranch
 
     private class AsyncDocument extends AsyncTask<Void, Void, Void> {
         @Override
@@ -47,6 +56,41 @@ public class FloorInfo extends Activity implements ResponseListener {
             return null;
         }
     }
+<<<<<<< HEAD
+=======
+
+    private class AsyncDirections extends AsyncTask<String, String, String> {
+        private Exception exceptionToBeThrown;
+
+        @Override
+        protected String doInBackground(String... params) {
+            String tmp_id = params[0];
+            WaterFountain wfr;
+            try {
+                flr = direction.find(Floor.class, tmp_id);
+                return flr.getDirection();
+            } catch (Exception e) {
+                exceptionToBeThrown = e;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // Check if exception exists.
+            if (exceptionToBeThrown != null) {
+                if (exceptionToBeThrown instanceof NoDocumentException) {
+                    Toast.makeText(FloorInfo.this, "Not there", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(FloorInfo.this, "Something went wrong, try again", Toast.LENGTH_SHORT).show();
+            } else{
+                Toast.makeText(FloorInfo.this, "result: " + result, Toast.LENGTH_SHORT).show();
+                direc.setText(result);
+            }
+
+        }
+    }
+>>>>>>> AnnaFinalBranch
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +98,20 @@ public class FloorInfo extends Activity implements ResponseListener {
         setContentView(R.layout.activity_floor_info);
 
         TextView title = (TextView) findViewById(R.id.Ftitle);
+        direc = (TextView) findViewById(R.id.directions);
         Intent intent = getIntent();
         String newTitle = intent.getStringExtra(BuildingInfo.EXTRA_FLOOR);
         title.setText(newTitle);
         title.setTextSize(40);
+        //direc.setText("Testing the functionnnnnn!!!!!");
+
 
         GoogleAuthenticationManager.getInstance().register(this);
         Button scanButton = (Button) findViewById(R.id.bscan);
+
+        AsyncDirections asyncDirections = new AsyncDirections();
+        asyncDirections.execute(newTitle);
+
 
         scanButton.setOnClickListener(
                 new Button.OnClickListener() {
@@ -102,6 +153,7 @@ public class FloorInfo extends Activity implements ResponseListener {
                 break;
         }
     }
+<<<<<<< HEAD
 
     @Override
     public void onSuccess(Response response) {
@@ -114,6 +166,20 @@ public class FloorInfo extends Activity implements ResponseListener {
     }
 
     @Override
+=======
+
+    @Override
+    public void onSuccess(Response response) {
+        Log.d(TAG, "onSuccess :: " + response.getResponseText());
+        Log.d(TAG, AuthorizationManager.getInstance().getUserIdentity().toString());
+        email = AuthorizationManager.getInstance().getUserIdentity().getDisplayName();
+        auth = AuthorizationManager.getInstance().getCachedAuthorizationHeader() != null;
+        AsyncDocument at = new AsyncDocument();
+        at.execute();
+    }
+
+    @Override
+>>>>>>> AnnaFinalBranch
     public void onFailure(Response response, Throwable t, JSONObject extendedInfo) {
         if (null != t) {
             Log.d(TAG, "onFailure :: " + t.getMessage());

@@ -95,31 +95,57 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * The coordinates where declared as private static variable in the beginning of this clas
      * */
     public void markers(GoogleMap googleMap){
-        Marker library = googleMap.addMarker(new MarkerOptions().position(LIBRARY).alpha(0).title("Meriam Library"));
-        Marker Glenn = googleMap.addMarker(new MarkerOptions().position(GLEEN).alpha(0).title("Gleen Hall"));
-        Marker ocONNEL = googleMap.addMarker(new MarkerOptions().position(OCONNEL).alpha(0).title("O'Connel"));
-        Marker Yolo = googleMap.addMarker(new MarkerOptions().position(YOLO).alpha(0).title("Gleen Hall"));
-        Marker Sutter = googleMap.addMarker(new MarkerOptions().position(SUTTER).alpha(0).title("Yolo"));
-        Marker Tehama = googleMap.addMarker(new MarkerOptions().position(TEHAMA).alpha(0).title("Tehama"));
+        Marker ocONNEL = googleMap.addMarker(new MarkerOptions().position(OCONNEL).alpha(0).title("O'Connell"));
+        Marker Acker = googleMap.addMarker(new MarkerOptions().position(ACKERGYM).alpha(0).title("Acker"));
+        // Missing Aymer J. Hamilton
+        Marker Ayres = googleMap.addMarker(new MarkerOptions().position(AYRES).alpha(0).title("Ayres Hall"));
+        Marker Bmu = googleMap.addMarker(new MarkerOptions().position(BMU).alpha(0).title("BMU"));
         Marker Butte = googleMap.addMarker(new MarkerOptions().position(BUTTE).alpha(0).title("Butte Hall"));
+        //missing Center for Continuing Education
+        Marker Colusa = googleMap.addMarker(new MarkerOptions().position(COLUSA).alpha(0).title("Colusa Hall"));
+        Marker Glenn = googleMap.addMarker(new MarkerOptions().position(GLEEN).alpha(0).title("Gleen Hall"));
+        Marker Holt = googleMap.addMarker(new MarkerOptions().position(HOLT).alpha(0).title("Holt Hall"));
+        Marker Kendal = googleMap.addMarker(new MarkerOptions().position(KENDAL).alpha(0).title("Kendall Hall"));
+        //Langdon Hall
+        Marker Laxson = googleMap.addMarker(new MarkerOptions().position(LAXSON).alpha(0).title("Laxson Auditorium"));
+        Marker library = googleMap.addMarker(new MarkerOptions().position(LIBRARY).alpha(0).title("Meriam Library"));
+        //Modoc Hall
+        Marker ArtCenter = googleMap.addMarker(new MarkerOptions().position(ARTCENTER).alpha(0).title("Performing Arts Center"));
+        Marker PhysicalScience = googleMap.addMarker(new MarkerOptions().position(PHYSICALSCIENCE).alpha(0).title("Physical Science Building"));
+        Marker Plumas = googleMap.addMarker(new MarkerOptions().position(PLUMAS).alpha(0).title("Plumas Hall"));
+        // Selvester Cafe
+        Marker Shumer = googleMap.addMarker(new MarkerOptions().position(SHURMERGYM).alpha(0).title("Shurmer Gym"));
+        //Sierra Hall
+        Marker Siskiyou = googleMap.addMarker(new MarkerOptions().position(SISKIYOU).alpha(0).title("Siskiyou Hall"));
+        //Student Health Center
+        Marker StudentCenter = googleMap.addMarker(new MarkerOptions().position(STUDENTCENTER).alpha(0).title("Student Service Center"));
+        Marker Sutter = googleMap.addMarker(new MarkerOptions().position(SUTTER).alpha(0).title("Sutter Hall"));
+        Marker Tehama = googleMap.addMarker(new MarkerOptions().position(TEHAMA).alpha(0).title("Tehama Hall"));
+        Marker Trinity = googleMap.addMarker(new MarkerOptions().position(TRINITY).alpha(0).title("Trinity Hall"));
+        Marker Yolo = googleMap.addMarker(new MarkerOptions().position(YOLO).alpha(0).title("Yolo Hall"));
+
+
+
+
+
         Marker Whitney = googleMap.addMarker(new MarkerOptions().position(WHITNEY).alpha(0).title("Whitney Hall"));
         Marker Albert = googleMap.addMarker(new MarkerOptions().position(ALBERT).alpha(0).title("Albert"));
-        Marker Acker = googleMap.addMarker(new MarkerOptions().position(ACKERGYM).alpha(0).title("Acker Gym"));
-        Marker Shumer = googleMap.addMarker(new MarkerOptions().position(SHURMERGYM).alpha(0).title("Shurmer Gym"));
-        Marker Plumas = googleMap.addMarker(new MarkerOptions().position(PLUMAS).alpha(0).title("Plumas Hall"));
+
+
+
         Marker Lassen = googleMap.addMarker(new MarkerOptions().position(LASSEN).alpha(0).title("Lassen Hall"));
-        Marker Holt = googleMap.addMarker(new MarkerOptions().position(HOLT).alpha(0).title("Holt"));
+
         Marker Shasta = googleMap.addMarker(new MarkerOptions().position(SHASTA).alpha(0).title("Shasta"));
-        Marker Colusa = googleMap.addMarker(new MarkerOptions().position(COLUSA).alpha(0).title("Colusa"));
-        Marker Siskiyou = googleMap.addMarker(new MarkerOptions().position(SISKIYOU).alpha(0).title("Siskiyou"));
-        Marker Trinity = googleMap.addMarker(new MarkerOptions().position(TRINITY).alpha(0).title("Trinity"));
-        Marker Bmu = googleMap.addMarker(new MarkerOptions().position(BMU).alpha(0).title("BMU"));
-        Marker ArtCenter = googleMap.addMarker(new MarkerOptions().position(ARTCENTER).alpha(0).title("Art Center"));
-        Marker Kendal = googleMap.addMarker(new MarkerOptions().position(KENDAL).alpha(0).title("Kendal"));
-        Marker Laxson = googleMap.addMarker(new MarkerOptions().position(LAXSON).alpha(0).title("Laxson"));
-        Marker Ayres = googleMap.addMarker(new MarkerOptions().position(AYRES).alpha(0).title("Ayres"));
-        Marker PhysicalScience = googleMap.addMarker(new MarkerOptions().position(PHYSICALSCIENCE).alpha(0).title("Physical Science"));
-        Marker StudentCenter = googleMap.addMarker(new MarkerOptions().position(STUDENTCENTER).alpha(0).title("Student Center"));
+
+
+
+
+
+
+
+
+
+
     }
 
     /**
