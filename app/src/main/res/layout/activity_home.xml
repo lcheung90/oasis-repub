@@ -65,25 +65,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
-    <ImageView
-        android:layout_width="110dp"
-        android:layout_height="200dp"
-        android:id="@+id/bottle_img"
-        android:src="@mipmap/ic_water_bottle"
-        android:layout_marginTop="26dp"
-        android:layout_below="@+id/tv_userpoints"
-        android:layout_toEndOf="@+id/btn_scan" />
 
-
-
-    <ImageView
-        android:layout_width="110dp"
-        android:layout_height="200dp"
-        android:id="@+id/fountain_img"
-        android:src="@mipmap/ic_water_bottle_fountain"
-        android:layout_alignTop="@+id/bottle_img"
-        android:layout_toStartOf="@+id/btn_scan"
-        android:paddingRight="3dp" />
 
 
 

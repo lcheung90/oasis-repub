@@ -37,8 +37,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
 
     private TextView user_points;
     private TextView user_email;
-    private ImageView bottle;
-    private ImageView fountain;
     private Button scanButton;
     private SignInButton signIn;
     private FloatingActionButton signOut;
@@ -142,8 +140,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         scanButton = (Button) findViewById(R.id.btn_scan);
         user_email = (TextView) findViewById(R.id.tv_useremail);
         user_points = (TextView) findViewById(R.id.tv_userpoints);
-        bottle = (ImageView) findViewById(R.id.bottle_img);
-        fountain = (ImageView) findViewById(R.id.fountain_img);
         signIn = (SignInButton) findViewById(R.id.sign_in_button);
         signOut = (FloatingActionButton) findViewById(R.id.fab);
 
