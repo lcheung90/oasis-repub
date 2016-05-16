@@ -108,7 +108,7 @@ public class BuildingInfo extends Activity {
                                         // starting a new intent and passing the FLoor number on the DEFINED variable EXTRA_FLOOR
                                         Intent floorIntent = new Intent(BuildingInfo.this, FloorInfo.class);
                                         floorIntent.putExtra(EXTRA_FLOOR, floorNumber);
-                                        startActivity(floorIntent);
+                                        startActivityForResult(floorIntent,SCAN_REQUEST_CODE);
                                     }
                                 }
                         );
