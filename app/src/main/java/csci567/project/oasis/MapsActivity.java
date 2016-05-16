@@ -123,29 +123,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Marker Tehama = googleMap.addMarker(new MarkerOptions().position(TEHAMA).alpha(0).title("Tehama Hall"));
         Marker Trinity = googleMap.addMarker(new MarkerOptions().position(TRINITY).alpha(0).title("Trinity Hall"));
         Marker Yolo = googleMap.addMarker(new MarkerOptions().position(YOLO).alpha(0).title("Yolo Hall"));
-
-
-
-
-
         Marker Whitney = googleMap.addMarker(new MarkerOptions().position(WHITNEY).alpha(0).title("Whitney Hall"));
         Marker Albert = googleMap.addMarker(new MarkerOptions().position(ALBERT).alpha(0).title("Albert"));
-
-
-
         Marker Lassen = googleMap.addMarker(new MarkerOptions().position(LASSEN).alpha(0).title("Lassen Hall"));
-
         Marker Shasta = googleMap.addMarker(new MarkerOptions().position(SHASTA).alpha(0).title("Shasta"));
-
-
-
-
-
-
-
-
-
-
     }
 
     /**

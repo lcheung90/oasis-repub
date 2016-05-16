@@ -4,11 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-
-
-
-
 public class Rewards extends AppCompatActivity {
 
     public ImageView reward_konas, reward_kinders;

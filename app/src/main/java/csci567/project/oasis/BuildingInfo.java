@@ -16,20 +16,12 @@ import com.cloudant.client.org.lightcouch.NoDocumentException;
 public class BuildingInfo extends Activity {
 
     public final static String EXTRA_FLOOR = "csci567/project/oasis.FLOOR";
-<<<<<<< HEAD
     private static final int SCAN_REQUEST_CODE = 8;
-=======
     private Exception exceptionToBeThrown;
     private Database db = CloudantSingleton.getInstance().getClient().database("buildings", false);
     private static int numberFloor;
     private int savedFloor;
     private Building clickedBuilding = new Building();
-
-
-
-
-
->>>>>>> AnnaFinalBranch
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -43,9 +35,6 @@ public class BuildingInfo extends Activity {
         String newTitle = intent.getStringExtra(MapsActivity.EXTRA_MARKER);
         title.setText(newTitle);
         title.setTextSize(40);
-
-
-<<<<<<< HEAD
         LinearLayout linearL= (LinearLayout) findViewById(R.id.linearlayout_id);
 
       // creating buttons dynamically and settin all of them to be clickable
@@ -72,9 +61,6 @@ public class BuildingInfo extends Activity {
         linearL.addView(view);
 
        }
-=======
-
-
 
         class AsyncTaskRunner extends AsyncTask<String, String, Integer> {
             private Exception exceptionToBeThrown;
@@ -148,12 +134,8 @@ public class BuildingInfo extends Activity {
         AsyncTaskRunner runner = new AsyncTaskRunner();
         runner.execute(newTitle);
         Toast.makeText(BuildingInfo.this, "FLoor:" + clickedBuilding.getNumFloors(), Toast.LENGTH_SHORT).show();
-
-
-
-
->>>>>>> AnnaFinalBranch
     }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {

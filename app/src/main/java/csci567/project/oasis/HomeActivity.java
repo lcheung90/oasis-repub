@@ -37,10 +37,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
 
     private TextView user_points;
     private TextView user_email;
-<<<<<<< HEAD
-=======
-    private TextView scan_history;
->>>>>>> AnnaFinalBranch
     private Button scanButton;
     private SignInButton signIn;
     private FloatingActionButton signOut;
@@ -144,10 +140,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         scanButton = (Button) findViewById(R.id.btn_scan);
         user_email = (TextView) findViewById(R.id.tv_useremail);
         user_points = (TextView) findViewById(R.id.tv_userpoints);
-<<<<<<< HEAD
-=======
-        scan_history = (TextView) findViewById(R.id.scan_history);
->>>>>>> AnnaFinalBranch
         signIn = (SignInButton) findViewById(R.id.sign_in_button);
         signOut = (FloatingActionButton) findViewById(R.id.fab);
 

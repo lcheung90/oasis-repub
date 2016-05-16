@@ -15,13 +15,10 @@
         android:layout_height="match_parent"
         android:text="@string/FLoorTitle"
         android:layout_alignParentBottom="true"
-<<<<<<< HEAD
-        android:layout_centerHorizontal="true" />
-=======
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textColor="#074988" />
->>>>>>> AnnaFinalBranch
+
     <TextView
         android:id="@+id/directions"
         android:layout_width="wrap_content"
@@ -34,19 +31,14 @@
         android:layout_alignParentEnd="true"
         android:textStyle="bold|italic"
         android:textSize="@dimen/abc_floating_window_z" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Scan"
         android:id="@+id/bscan"
-<<<<<<< HEAD
-
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/Directions" />
-
-=======
-        android:layout_alignBottom="@+id/Ftitle"
+        android:layout_marginTop="69dp"
+        android:layout_below="@+id/directions"
         android:layout_centerHorizontal="true" />
->>>>>>> AnnaFinalBranch
 
 </RelativeLayout>

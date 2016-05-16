@@ -8,7 +8,6 @@ public class Floor {
     private String _rev;
     private String direction;
 
-
     public Floor() {
         _id = null;
         _rev = null;
