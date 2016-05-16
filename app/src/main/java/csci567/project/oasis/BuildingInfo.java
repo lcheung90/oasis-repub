@@ -2,6 +2,7 @@ package csci567.project.oasis;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -38,29 +39,29 @@ public class BuildingInfo extends Activity {
         LinearLayout linearL= (LinearLayout) findViewById(R.id.linearlayout_id);
 
       // creating buttons dynamically and settin all of them to be clickable
-       for(int i =1; i < 4 ; i++ ){
-
-           // Inflating the button into the Linear Layout from the activity_building_info.xml
-           View view = getLayoutInflater().inflate(R.layout.button,linearL,false);
-           final Button b = (Button) view.findViewById(R.id.custom_button);
-           b.setText("Floor " + i);
-
-           // setting the click Listener for the button that is being created
-           b.setOnClickListener(
-                   new Button.OnClickListener() {
-                       public void onClick(View v) {
-                           final String floorNumber = (String) b.getText();
-                           // starting a new intent and passing the FLoor number on the DEFINED variable EXTRA_FLOOR
-                           Intent floorIntent = new Intent(BuildingInfo.this, FloorInfo.class);
-                           floorIntent.putExtra(EXTRA_FLOOR, floorNumber);
-                           startActivityForResult(floorIntent, SCAN_REQUEST_CODE);
-                       }
-                   }
-           );
-        // Adds the new components ( buttons) to the view that is the activity_building_info.xml
-        linearL.addView(view);
-
-       }
+//       for(int i =1; i < 4 ; i++ ){
+//
+//           // Inflating the button into the Linear Layout from the activity_building_info.xml
+//           View view = getLayoutInflater().inflate(R.layout.button,linearL,false);
+//           final Button b = (Button) view.findViewById(R.id.custom_button);
+//           b.setText("Floor " + i);
+//
+//           // setting the click Listener for the button that is being created
+//           b.setOnClickListener(
+//                   new Button.OnClickListener() {
+//                       public void onClick(View v) {
+//                           final String floorNumber = (String) b.getText();
+//                           // starting a new intent and passing the FLoor number on the DEFINED variable EXTRA_FLOOR
+//                           Intent floorIntent = new Intent(BuildingInfo.this, FloorInfo.class);
+//                           floorIntent.putExtra(EXTRA_FLOOR, floorNumber);
+//                           startActivityForResult(floorIntent, SCAN_REQUEST_CODE);
+//                       }
+//                   }
+//           );
+//        // Adds the new components ( buttons) to the view that is the activity_building_info.xml
+//        linearL.addView(view);
+//
+//       }
 
         class AsyncTaskRunner extends AsyncTask<String, String, Integer> {
             private Exception exceptionToBeThrown;
@@ -95,6 +96,8 @@ public class BuildingInfo extends Activity {
                         View view = getLayoutInflater().inflate(R.layout.button,linearL,false);
                         final Button b = (Button) view.findViewById(R.id.custom_button);
                         b.setText("Floor " + i);
+//                        b.setBackgroundColor(Color.parseColor("ff009688"));
+//                        b.setTextColor(Color.parseColor("#fffff"));
 
 
                         // setting the click Listener for the button that is being created

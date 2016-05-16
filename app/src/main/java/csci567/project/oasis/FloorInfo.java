@@ -96,7 +96,6 @@ public class FloorInfo extends Activity implements ResponseListener {
         String newTitle = intent.getStringExtra(BuildingInfo.EXTRA_FLOOR);
         title.setText(newTitle);
         title.setTextSize(40);
-        //direc.setText("Testing the functionnnnnn!!!!!");
 
 
         GoogleAuthenticationManager.getInstance().register(this);
