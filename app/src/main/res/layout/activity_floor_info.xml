@@ -8,19 +8,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="csci567.project.oasis.FloorInfo"
-    android:background="#ffffff">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/imageView"
-        android:src="@drawable/water"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:focusable="false"
-        android:visibility="visible"
-        style="@style/AppTheme"
-        android:adjustViewBounds="false"
-        android:layout_below="@+id/bscan" />
+    android:background="@drawable/background">
+
     <TextView
         android:id="@+id/Ftitle"
         android:layout_width="wrap_content"
