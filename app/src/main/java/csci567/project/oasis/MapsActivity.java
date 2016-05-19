@@ -95,7 +95,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * The coordinates where declared as private static variable in the beginning of this clas
      * */
     public void markers(GoogleMap googleMap){
-        Marker ocONNEL = googleMap.addMarker(new MarkerOptions().position(OCONNEL).alpha(0).title("O'Connell"));
+        Marker ocONNEL = googleMap.addMarker(new MarkerOptions().position(OCONNEL).alpha(0).title("O Connell"));
         Marker Acker = googleMap.addMarker(new MarkerOptions().position(ACKERGYM).alpha(0).title("Acker"));
         // Missing Aymer J. Hamilton
         Marker Ayres = googleMap.addMarker(new MarkerOptions().position(AYRES).alpha(0).title("Ayres Hall"));
