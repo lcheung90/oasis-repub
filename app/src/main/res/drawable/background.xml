@@ -12,7 +12,7 @@
         android:top="0px">
         <bitmap
             android:antialias="true"
-            android:src="@drawable/cubes"
+            android:src="@drawable/hexagon_pattern"
             android:tileMode="repeat" />
     </item>
 </layer-list>
