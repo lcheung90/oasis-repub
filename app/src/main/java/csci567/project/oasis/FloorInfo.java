@@ -77,7 +77,7 @@ public class FloorInfo extends Activity implements ResponseListener {
                 } else
                     Toast.makeText(FloorInfo.this, "Something went wrong, try again", Toast.LENGTH_SHORT).show();
             } else{
-                Toast.makeText(FloorInfo.this, "result: " + result, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(FloorInfo.this, "result: " + result, Toast.LENGTH_SHORT).show();
                 direc.setText(result);
             }
 

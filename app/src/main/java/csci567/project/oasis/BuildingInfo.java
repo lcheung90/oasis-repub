@@ -84,7 +84,7 @@ public class BuildingInfo extends Activity {
                 // Check if exception exists.
                 if (exceptionToBeThrown != null) {
                     if (exceptionToBeThrown instanceof NoDocumentException) {
-                        Toast.makeText(BuildingInfo.this, "Not a Key", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BuildingInfo.this, "Building not in the Database", Toast.LENGTH_SHORT).show();
                     } else
                         Toast.makeText(BuildingInfo.this, "Something went wrong, try again", Toast.LENGTH_SHORT).show();
                 } else{
@@ -136,7 +136,7 @@ public class BuildingInfo extends Activity {
 
         AsyncTaskRunner runner = new AsyncTaskRunner();
         runner.execute(newTitle);
-        Toast.makeText(BuildingInfo.this, "FLoor:" + clickedBuilding.getNumFloors(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(BuildingInfo.this, "FLoor:" + clickedBuilding.getNumFloors(), Toast.LENGTH_SHORT).show();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
