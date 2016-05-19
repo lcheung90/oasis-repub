@@ -16,24 +16,30 @@
         android:id="@+id/btn_scan"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="99dp" />
+        android:layout_marginTop="99dp"
+        android:background="@color/accent_material_light"
+        android:textColor="#ffffff" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Locate"
         android:id="@+id/btn_locate"
+        android:background="@color/accent_material_light"
+        android:textColor="#ffffff"
         android:layout_below="@+id/btn_scan"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignStart="@+id/btn_scan"
+        android:layout_marginTop="33dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="32sp"
         android:text=""
         android:id="@+id/tv_userpoints"
-        android:layout_alignBottom="@+id/tv_useremail"
-        android:layout_alignEnd="@+id/fab" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 
 
@@ -62,7 +68,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text=""
         android:id="@+id/tv_useremail"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/tv_userpoints"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
