@@ -110,7 +110,7 @@ public class BuildingInfo extends Activity {
                                         floorIntent.putExtra(EXTRA_FLOOR, floorNumber);
                                         startActivityForResult(floorIntent,SCAN_REQUEST_CODE);
                                     }
-                                }
+                                 }
                         );
                         // Adds the new components ( buttons) to the view that is the activity_building_info.xml
                         linearL.addView(view);

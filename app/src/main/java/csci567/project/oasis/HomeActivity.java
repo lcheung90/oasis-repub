@@ -180,7 +180,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
             new SignInButton.OnClickListener() {
                 public void onClick(View v) {
                     new Request(BMSClient.getInstance().getBluemixAppRoute() + "/protected", Request.GET).send(HomeActivity.this, HomeActivity.this);
-                    Toast.makeText(HomeActivity.this, "login", Toast.LENGTH_SHORT).show();
                 }
             }
         );
@@ -188,7 +187,6 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
         signOut.setOnClickListener(
             new FloatingActionButton.OnClickListener() {
                 public void onClick(View v) {
-                    Toast.makeText(HomeActivity.this, "logout", Toast.LENGTH_SHORT).show();
                     GoogleAuthenticationManager.getInstance().logout(getApplicationContext(), null);
                     togglebuttons();
                     email = "";
@@ -204,9 +202,7 @@ public class HomeActivity extends AppCompatActivity implements ResponseListener 
 
             @Override
             public void onClick(View v) {
-                System.out.print("it is listening to the button");
                 Intent intent = new Intent(HomeActivity.this, MapsActivity.class);
-                System.out.print("it will start an activity");
                 Bundle b = new Bundle();
                 startActivityForResult(intent,SCAN_REQUEST_CODE);
             }

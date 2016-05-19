@@ -117,7 +117,6 @@ public class FloorInfo extends Activity implements ResponseListener {
                                     .setPositiveButton("Login", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             new Request(BMSClient.getInstance().getBluemixAppRoute() + "/protected", Request.GET).send(FloorInfo.this, FloorInfo.this);
-                                            Toast.makeText(FloorInfo.this, "login", Toast.LENGTH_SHORT).show();
                                         }
                                     }).show();
                         }
